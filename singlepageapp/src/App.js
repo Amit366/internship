@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Card from "./components/Card";
 import Loader from "./components/Loader";
 import Axios from "axios";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [isClicked, setIsClicked] = useState(0);
@@ -25,6 +26,7 @@ function App() {
   return (
     <div className="App">
       <Navbar onSetIsClicked={setIsClicked} />
+      <ToastContainer position="top-center" hideProgressBar={false} />
       <div className="row">
         {/*mapping through response*/}
         {data &&
