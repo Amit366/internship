@@ -10,15 +10,21 @@ function App() {
   const [isClicked, setIsClicked] = useState(0);
   const [data, setData] = useState(null);
   const [isLoader, setIsLoader] = useState(false);
+  const [error, setError] = useState(null);
 
   const getUsers = () => {
     setIsLoader(true);
-    Axios.get("https://dev.dashmed.in/sample-data").then((response) => {
-      console.log("api data received");
-      setData(response.data.data);
+    Axios.get("https://dev.dashmed.in/sample-data1")
+      .then((response) => {
+        console.log("api data received");
+        setData(response.data.data);
 
-      setIsLoader(false);
-    });
+        setIsLoader(false);
+      })
+      .catch((err) => {
+        setError("error.message");
+        setIsLoader(false);
+      });
   };
   useEffect(() => {
     isClicked && getUsers();
@@ -31,16 +37,11 @@ function App() {
         {/*mapping through response*/}
         {data &&
           data.map((val) => {
-            return (
-              <Card
-                medname={val.medName}
-                saltName={val.saltName}
-                manufacturer={val.manufacturer}
-              />
-            );
+            return <Card data={val} />;
           })}
       </div>
       <Loader show={isLoader} />
+      {error && <p>{"Error mesaage"}</p>}
     </div>
   );
 }

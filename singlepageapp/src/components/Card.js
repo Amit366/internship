@@ -1,7 +1,14 @@
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Card = ({ saltName, medname, manufacturer }) => {
+const Card = ({ data }) => {
+  console.log(data);
+
+  const key = Object.keys(data);
+  const value = Object.values(data);
+  for (const [key, value] of Object.entries(data)) {
+    console.log(`${key}: ${value}`);
+  }
   const notify = () => {
     toast.options = {
       preventDuplicates: true,
@@ -17,10 +24,13 @@ const Card = ({ saltName, medname, manufacturer }) => {
             <div className="col-12 col-lg-12">
               <div className="wrapper">
                 <span className="med">
-                  <b>{medname}</b>
+                  {key.map((key) => (
+                    <p> {key} </p>
+                  ))}
+                  {value.map((value) => (
+                    <p> {value} </p>
+                  ))}
                 </span>
-                <p className="secondary">{saltName}</p>
-                <p className="manu">{manufacturer}</p>
               </div>
             </div>
           </div>
